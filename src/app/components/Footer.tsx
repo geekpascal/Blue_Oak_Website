@@ -43,13 +43,13 @@ const Footer = () => {
               <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors"><LinkedIn className="w-6 h-6" /></a>
               <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors"><Instagram className="w-6 h-6" /></a>
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <h4 className="text-sm font-semibold mb-2 text-white">Subscribe to our newsletter</h4>
               <form className="flex flex-col sm:flex-row">
                 <input type="email" placeholder="Enter your email" className="bg-gray-800 text-white px-4 py-2 rounded-md sm:rounded-l-md sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2 mt-2 sm:mt-0 sm:rounded-r-md sm:rounded-l-none hover:bg-blue-600 transition-colors">Subscribe</button>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-800 text-sm text-center">
