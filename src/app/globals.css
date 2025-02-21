@@ -11,6 +11,10 @@
   --text-secondary: 75, 85, 99; /* Gray-600 */
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     @apply text-gray-900 bg-white;
@@ -23,6 +27,11 @@
   h5,
   h6 {
     @apply font-bold tracking-tight;
+  }
+
+  /* Add scroll margin for sections to account for fixed navbar */
+  section[id] {
+    scroll-margin-top: 80px;
   }
 }
 

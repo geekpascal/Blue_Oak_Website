@@ -26,7 +26,7 @@ const MissionVision = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-100">
+    <section id="about" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="grid md:grid-cols-2 gap-12 items-center"

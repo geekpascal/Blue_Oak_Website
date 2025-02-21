@@ -26,7 +26,7 @@ const AITelecom = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-100">
+    <section id="ai-telecom" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           className="text-4xl font-bold mb-12 text-center text-gray-800"
