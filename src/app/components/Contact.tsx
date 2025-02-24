@@ -1,26 +1,36 @@
 "use client"
 
-import type React from "react"
-
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useRef } from "react"
+import emailjs from "@emailjs/browser"
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prevState) => ({ ...prevState, [name]: value }))
-  }
+  const form = useRef<HTMLFormElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log(formData)
+    setIsSubmitting(true)
+
+    if (!form.current) return
+
+    emailjs.sendForm(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      form.current,
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID!
+    )
+    .then((result) => {
+      setSubmitStatus('success')
+      form.current?.reset()
+    })
+    .catch((error) => {
+      setSubmitStatus('error')
+    })
+    .finally(() => {
+      setIsSubmitting(false)
+    })
   }
 
   return (
@@ -60,7 +70,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="md:w-1/2 p-8">
-              <form onSubmit={handleSubmit}>
+              <form ref={form} onSubmit={handleSubmit}>
                 <div className="mb-6">
                   <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                     Name
@@ -69,8 +79,6 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
                     required
                   />
@@ -83,8 +91,6 @@ const Contact = () => {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
                     required
                   />
@@ -96,8 +102,6 @@ const Contact = () => {
                   <textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
                     rows={4}
                     className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
                     required
@@ -106,11 +110,22 @@ const Contact = () => {
                 <div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300"
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
+                {submitStatus === 'success' && (
+                  <div className="mt-4 text-green-600 text-center">
+                    Message sent successfully! We'll get back to you soon.
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="mt-4 text-red-600 text-center">
+                    Error sending message. Please try again or contact us directly via email.
+                  </div>
+                )}
               </form>
             </div>
           </div>
