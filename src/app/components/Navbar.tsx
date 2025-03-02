@@ -1,8 +1,216 @@
-"use client"
+// "use client"
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react"
+// import { useState, useEffect } from "react"
+// import { motion, AnimatePresence } from "framer-motion"
+// import { Menu, X, ChevronDown, ChevronRight } from "lucide-react"
+
+// const navItems = [
+//   { name: "Home", href: "home" },
+//   {
+//     name: "Services",
+//     href: "services",
+//     subItems: [
+//       { name: "AI Healthcare", href: "ai-healthcare" },
+//       { name: "AI Telecom", href: "ai-telecom" },
+//       { name: "Benefits", href: "benefits" },
+//     ],
+//   },
+//   { name: "About", href: "about" },
+//   { name: "Contact", href: "contact" },
+// ]
+
+// const Navbar = () => {
+//   const [scrolled, setScrolled] = useState(false)
+//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+//   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setScrolled(window.scrollY > 20)
+//     }
+//     window.addEventListener("scroll", handleScroll)
+//     return () => window.removeEventListener("scroll", handleScroll)
+//   }, [])
+
+//   const handleNavigation = (href: string) => {
+//     // Close mobile menu and reset dropdown
+//     setMobileMenuOpen(false)
+//     setActiveDropdown(null)
+
+//     // Add a small delay to ensure the menu is closed before scrolling
+//     setTimeout(() => {
+//       const element = document.getElementById(href)
+//       if (element) {
+//         const navHeight = 80 // Height of your fixed navbar
+//         const elementPosition = element.getBoundingClientRect().top + window.scrollY
+//         const offsetPosition = elementPosition - navHeight
+
+//         window.scrollTo({
+//           top: offsetPosition,
+//           behavior: "smooth",
+//         })
+//       }
+//     }, 100)
+//   }
+
+//   return (
+//     <motion.nav
+//       className={`fixed w-full z-50 transition-all duration-300 ${
+//         scrolled ? "bg-gray-900/95 backdrop-blur-md py-2" : "bg-transparent py-4"
+//       }`}
+//       initial={{ y: -100 }}
+//       animate={{ y: 0 }}
+//       transition={{ duration: 0.5 }}
+//     >
+//       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+//         <div className="flex justify-between items-center">
+//           {/* Logo */}
+//           <button onClick={() => handleNavigation("home")} className="flex items-center space-x-3">
+//             <svg className="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+//               <path
+//                 d="M12 2L2 7L12 12L22 7L12 2Z"
+//                 stroke="currentColor"
+//                 strokeWidth="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//               />
+//               <path
+//                 d="M2 17L12 22L22 17"
+//                 stroke="currentColor"
+//                 strokeWidth="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//               />
+//               <path
+//                 d="M2 12L12 17L22 12"
+//                 stroke="currentColor"
+//                 strokeWidth="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//               />
+//             </svg>
+//             <span className="text-xl font-bold text-white">Blue Oak Tech</span>
+//           </button>
+
+//           {/* Desktop Menu */}
+//           <div className="hidden md:flex space-x-8">
+//             {navItems.map((item) => (
+//               <div
+//                 key={item.name}
+//                 className="relative group"
+//                 onMouseEnter={() => item.subItems && setActiveDropdown(item.name)}
+//                 onMouseLeave={() => setActiveDropdown(null)}
+//               >
+//                 <button
+//                   onClick={() => handleNavigation(item.href)}
+//                   className="text-gray-300 hover:text-blue-500 transition-colors py-2 flex items-center"
+//                 >
+//                   {item.name}
+//                   {item.subItems && <ChevronDown className="ml-1 w-4 h-4" />}
+//                 </button>
+
+//                 {item.subItems && activeDropdown === item.name && (
+//                   <motion.div
+//                     initial={{ opacity: 0, y: 10 }}
+//                     animate={{ opacity: 1, y: 0 }}
+//                     exit={{ opacity: 0, y: 10 }}
+//                     className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-2"
+//                   >
+//                     {item.subItems.map((subItem) => (
+//                       <button
+//                         key={subItem.name}
+//                         onClick={() => handleNavigation(subItem.href)}
+//                         className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+//                       >
+//                         {subItem.name}
+//                       </button>
+//                     ))}
+//                   </motion.div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* Mobile Menu Button */}
+//           <button
+//             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+//             className="md:hidden text-gray-300 hover:text-white p-2 rounded-lg hover:bg-gray-800"
+//           >
+//             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+//           </button>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         <AnimatePresence>
+//           {mobileMenuOpen && (
+//             <motion.div
+//               initial={{ opacity: 0, y: -20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.2 }}
+//               className="md:hidden mt-4 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden"
+//             >
+//               {navItems.map((item) => (
+//                 <div key={item.name} className="border-b border-gray-700 last:border-none">
+//                   {item.subItems ? (
+//                     <>
+//                       <button
+//                         onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+//                         className="flex items-center justify-between w-full px-4 py-3 text-gray-300 hover:bg-gray-700"
+//                       >
+//                         <span>{item.name}</span>
+//                         <ChevronRight
+//                           className={`w-5 h-5 transition-transform duration-200 ${
+//                             activeDropdown === item.name ? "rotate-90" : ""
+//                           }`}
+//                         />
+//                       </button>
+//                       <AnimatePresence>
+//                         {activeDropdown === item.name && (
+//                           <motion.div
+//                             initial={{ height: 0, opacity: 0 }}
+//                             animate={{ height: "auto", opacity: 1 }}
+//                             exit={{ height: 0, opacity: 0 }}
+//                             transition={{ duration: 0.2 }}
+//                             className="bg-gray-900"
+//                           >
+//                             {item.subItems.map((subItem) => (
+//                               <button
+//                                 key={subItem.name}
+//                                 onClick={() => handleNavigation(subItem.href)}
+//                                 className="block w-full text-left px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white"
+//                               >
+//                                 {subItem.name}
+//                               </button>
+//                             ))}
+//                           </motion.div>
+//                         )}
+//                       </AnimatePresence>
+//                     </>
+//                   ) : (
+//                     <button
+//                       onClick={() => handleNavigation(item.href)}
+//                       className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white"
+//                     >
+//                       {item.name}
+//                     </button>
+//                   )}
+//                 </div>
+//               ))}
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </div>
+//     </motion.nav>
+//   )
+// }
+
+// export default Navbar
+
+"use client";
+
+import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "home" },
@@ -17,79 +225,74 @@ const navItems = [
   },
   { name: "About", href: "about" },
   { name: "Contact", href: "contact" },
-]
+];
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavigation = (href: string) => {
-    // Close mobile menu and reset dropdown
-    setMobileMenuOpen(false)
-    setActiveDropdown(null)
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
 
-    // Add a small delay to ensure the menu is closed before scrolling
     setTimeout(() => {
-      const element = document.getElementById(href)
+      const element = document.getElementById(href);
       if (element) {
-        const navHeight = 80 // Height of your fixed navbar
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY
-        const offsetPosition = elementPosition - navHeight
+        const navHeight = 80; // Height of the navbar
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - navHeight;
 
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth",
-        })
+        });
       }
-    }, 100)
-  }
+    }, 100);
+  };
+
+  const handleMouseEnter = (name: string) => {
+    if (dropdownTimeout) clearTimeout(dropdownTimeout);
+    setActiveDropdown(name);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => setActiveDropdown(null), 300); // Keep dropdown open longer
+    setDropdownTimeout(timeout);
+  };
 
   return (
-    <motion.nav
+    <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-gray-900/95 backdrop-blur-md py-2" : "bg-transparent py-4"
+        scrolled ? "bg-gray-900/90 backdrop-blur-md py-2 shadow-lg" : "bg-transparent py-4"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <button onClick={() => handleNavigation("home")} className="flex items-center space-x-3">
-            <svg className="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 2L2 7L12 12L22 7L12 2Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 17L12 22L22 17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 12L12 17L22 12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span className="text-xl font-bold text-white">Blue Oak Tech</span>
+          <button 
+            onClick={() => handleNavigation("home")} 
+            className="flex items-center space-x-3"
+          >
+            <div className="relative">
+              <svg className="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <span className="text-xl font-bold text-white">
+              <span className="text-blue-400">Blue</span> Oak Tech
+            </span>
           </button>
 
           {/* Desktop Menu */}
@@ -98,34 +301,30 @@ const Navbar = () => {
               <div
                 key={item.name}
                 className="relative group"
-                onMouseEnter={() => item.subItems && setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                onMouseEnter={() => item.subItems && handleMouseEnter(item.name)}
+                onMouseLeave={handleMouseLeave}
               >
                 <button
                   onClick={() => handleNavigation(item.href)}
-                  className="text-gray-300 hover:text-blue-500 transition-colors py-2 flex items-center"
+                  className="text-gray-200 hover:text-blue-400 transition-colors duration-200 py-2 flex items-center font-medium"
                 >
                   {item.name}
-                  {item.subItems && <ChevronDown className="ml-1 w-4 h-4" />}
+                  {item.subItems && <ChevronDown className="ml-1 w-4 h-4 opacity-70 group-hover:opacity-100" />}
                 </button>
 
+                {/* Dropdown */}
                 {item.subItems && activeDropdown === item.name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-2"
-                  >
+                  <div className="absolute left-0 mt-2 w-56 bg-gray-800/95 backdrop-blur-md rounded-lg shadow-lg py-2 border border-gray-700/50">
                     {item.subItems.map((subItem) => (
                       <button
                         key={subItem.name}
                         onClick={() => handleNavigation(subItem.href)}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="block w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-blue-600/20 hover:text-blue-300 transition-colors duration-200"
                       >
                         {subItem.name}
                       </button>
                     ))}
-                  </motion.div>
+                  </div>
                 )}
               </div>
             ))}
@@ -134,76 +333,59 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-300 hover:text-white p-2 rounded-lg hover:bg-gray-800"
+            className="md:hidden text-gray-300 hover:text-blue-400 p-2 rounded-lg hover:bg-gray-800/70 transition-colors duration-200"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden mt-4 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden"
-            >
-              {navItems.map((item) => (
-                <div key={item.name} className="border-b border-gray-700 last:border-none">
-                  {item.subItems ? (
-                    <>
-                      <button
-                        onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                        className="flex items-center justify-between w-full px-4 py-3 text-gray-300 hover:bg-gray-700"
-                      >
-                        <span>{item.name}</span>
-                        <ChevronRight
-                          className={`w-5 h-5 transition-transform duration-200 ${
-                            activeDropdown === item.name ? "rotate-90" : ""
-                          }`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {activeDropdown === item.name && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="bg-gray-900"
-                          >
-                            {item.subItems.map((subItem) => (
-                              <button
-                                key={subItem.name}
-                                onClick={() => handleNavigation(subItem.href)}
-                                className="block w-full text-left px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white"
-                              >
-                                {subItem.name}
-                              </button>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </>
-                  ) : (
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 bg-gray-800/95 backdrop-blur-md rounded-lg shadow-xl border border-gray-700/50">
+            {navItems.map((item) => (
+              <div key={item.name} className="border-b border-gray-700/50 last:border-none">
+                {item.subItems ? (
+                  <>
                     <button
-                      onClick={() => handleNavigation(item.href)}
-                      className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white"
+                      onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                      className="flex items-center justify-between w-full px-4 py-3 text-gray-200 hover:bg-gray-700/70 hover:text-blue-400 transition-colors duration-200"
                     >
-                      {item.name}
+                      <span className="font-medium">{item.name}</span>
+                      <ChevronRight
+                        className={`w-5 h-5 text-blue-400/70 transition-transform duration-200 ${
+                          activeDropdown === item.name ? "rotate-90" : ""
+                        }`}
+                      />
                     </button>
-                  )}
-                </div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+                    {activeDropdown === item.name && (
+                      <div className="bg-gray-900/80 border-l-2 border-blue-500/30 ml-2">
+                        {item.subItems.map((subItem) => (
+                          <button
+                            key={subItem.name}
+                            onClick={() => handleNavigation(subItem.href)}
+                            className="block w-full text-left px-6 py-3 text-gray-400 hover:bg-gray-800/70 hover:text-blue-300 transition-colors duration-200"
+                          >
+                            {subItem.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <button
+                    onClick={() => handleNavigation(item.href)}
+                    className="block w-full text-left px-4 py-3 text-gray-200 font-medium hover:bg-gray-700/70 hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {item.name}
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    </motion.nav>
-  )
-}
+    </nav>
+  );
+};
 
-export default Navbar
-
+export default Navbar;
