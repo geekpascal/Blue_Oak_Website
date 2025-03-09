@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 
 const services = [
   {
-    title: "Systems Design, Implementation, and Integration",
-    description: "Our team of experts designs and implements tailored IT and telecom solutions that meet your business needs, ensuring seamless integration with existing systems.",
+    title: "System Design, Implementation, and Integration",
+    description: "Our team of experts design and implement tailored IT and telecom solutions that meet your business needs, ensuring seamless integration with existing systems.",
     svg: (
       <div className="relative w-full h-48 flex items-center justify-center group">
         <motion.div
